@@ -2,13 +2,13 @@ import React from 'react';
 import {PaperProvider} from 'react-native-paper';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-import AppNavigator from './src/navigation/AppNavigation';
+import RootNavigator from './src/navigation';
 
 function App(): React.JSX.Element {
   return (
     <SafeAreaProvider>
       <PaperProvider /* theme={theme} */>
-        <AppNavigator />
+        <RootNavigator />
       </PaperProvider>
     </SafeAreaProvider>
   );

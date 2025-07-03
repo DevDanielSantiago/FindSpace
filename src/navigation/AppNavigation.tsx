@@ -2,13 +2,13 @@ import React, {useState} from 'react';
 import {BottomNavigation} from 'react-native-paper';
 
 import {BookingsScreen} from '../screens/Bookings';
-import {HomeScreen} from '../screens/Home';
 import {ProfileScreen} from '../screens/Profile';
 import {SearchScreen} from '../screens/Search';
+import HomeStackNavigator from './HomeStackNavigator';
 import {bottomNavigationStyles} from './styles';
 
 const renderScene = BottomNavigation.SceneMap({
-  home: HomeScreen,
+  home: HomeStackNavigator,
   search: SearchScreen,
   bookings: BookingsScreen,
   profile: ProfileScreen,
