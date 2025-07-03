@@ -1,24 +1,25 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {
   FlatList,
   Image,
   SafeAreaView,
-  StatusBar,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import Ionicons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {Spaces} from '../../mocks/spaces.mock';
 
+import {HomeNavigationProp} from '../../navigation/HomeStackNavigator';
 import {chipsStyles, contentStyles, headerStyles, mainStyles} from './styles';
 
 export function HomeScreen() {
+  const navigation = useNavigation<HomeNavigationProp>();
+
   return (
     <View style={mainStyles.container}>
-      <StatusBar backgroundColor={'#F4F4F4'} barStyle={'dark-content'} />
-
       <View style={mainStyles.body}>
         <View style={headerStyles.header}>
           <View style={headerStyles.headerWrapper}>
@@ -27,7 +28,11 @@ export function HomeScreen() {
           <TouchableOpacity
             onPress={() => console.log('click')}
             style={headerStyles.filters}>
-            <Ionicons name="tune-variant" size={24} color="#0D141C" />
+            <MaterialCommunityIcons
+              name="tune-variant"
+              size={24}
+              color="#0D141C"
+            />
           </TouchableOpacity>
         </View>
 
@@ -40,7 +45,10 @@ export function HomeScreen() {
           <FlatList
             data={Spaces}
             renderItem={({item: data, index}) => (
-              <TouchableOpacity onPress={() => console.log('click')}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('Details', {itemId: data.id})
+                }>
                 <View style={contentStyles.card}>
                   <View key={index} style={contentStyles.cardWrapper}>
                     <Text style={contentStyles.cardAvailability}>
