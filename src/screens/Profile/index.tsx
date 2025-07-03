@@ -2,10 +2,14 @@ import React from 'react';
 import {Image, ScrollView, Text, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import {useNavigation} from '@react-navigation/native';
 import {TouchableRipple} from 'react-native-paper';
+import {ProfileNavigationProp} from '../../navigation/ProfileStackNavigator';
 import {headerStyles, mainStyles, optionsStyles, profileStyles} from './styles';
 
 export function ProfileScreen() {
+  const navigation = useNavigation<ProfileNavigationProp>();
+
   return (
     <View style={mainStyles.container}>
       <View style={mainStyles.body}>
@@ -59,7 +63,7 @@ export function ProfileScreen() {
             <Text style={optionsStyles.name}>Notifications</Text>
           </View>
           <TouchableRipple
-            onPress={() => console.log('Pressed')}
+            onPress={() => navigation.navigate('Language')}
             rippleColor="rgba(0, 0, 0, 0.32)">
             <View style={optionsStyles.wrapper}>
               <View style={optionsStyles.cardIcon}>
