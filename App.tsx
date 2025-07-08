@@ -5,6 +5,8 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import RootNavigator from './src/navigation';
 
+import './src/i18n';
+
 function App(): React.JSX.Element {
   return (
     <SafeAreaProvider>

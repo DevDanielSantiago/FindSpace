@@ -6,6 +6,7 @@ import React from 'react';
 import {BottomNavigation} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import {useTranslation} from 'react-i18next';
 import {TabBarIconProps} from '../@types/tab-bar';
 import {BookingsScreen} from '../screens/Bookings';
 import {SearchScreen} from '../screens/Search';
@@ -75,27 +76,29 @@ function CustomTabBar({
 }
 
 export default function AppNavigator() {
+  const {t} = useTranslation(['navigation']);
+
   return (
     <Tab.Navigator tabBar={CustomTabBar} screenOptions={{headerShown: false}}>
       <Tab.Screen
         name="Home"
         component={HomeStackNavigator}
-        options={{tabBarLabel: 'Home', tabBarIcon: HomeIcon}}
+        options={{tabBarLabel: t('home'), tabBarIcon: HomeIcon}}
       />
       <Tab.Screen
         name="Search"
         component={SearchScreen}
-        options={{tabBarLabel: 'Search', tabBarIcon: SearchIcon}}
+        options={{tabBarLabel: t('search'), tabBarIcon: SearchIcon}}
       />
       <Tab.Screen
         name="Bookings"
         component={BookingsScreen}
-        options={{tabBarLabel: 'Bookings', tabBarIcon: BookingsIcon}}
+        options={{tabBarLabel: t('bookings'), tabBarIcon: BookingsIcon}}
       />
       <Tab.Screen
         name="Profile"
         component={ProfileStackNavigator}
-        options={{tabBarLabel: 'Profile', tabBarIcon: ProfileIcon}}
+        options={{tabBarLabel: t('profile'), tabBarIcon: ProfileIcon}}
       />
     </Tab.Navigator>
   );

@@ -4,6 +4,7 @@ import {
 } from '@react-navigation/native-stack';
 import React from 'react';
 
+import {useTranslation} from 'react-i18next';
 import {LanguageScreen} from '../screens/Language';
 import {ProfileScreen} from '../screens/Profile';
 
@@ -18,6 +19,8 @@ export type ProfileNavigationProp =
 const Stack = createNativeStackNavigator<ProfileStackParamList>();
 
 export default function ProfileStackNavigator() {
+  const {t} = useTranslation(['language']);
+
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -29,7 +32,7 @@ export default function ProfileStackNavigator() {
         name="Language"
         component={LanguageScreen}
         options={{
-          title: 'Language',
+          title: t('title'),
           headerStyle: {backgroundColor: '#F4F4F4'},
         }}
       />

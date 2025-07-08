@@ -1,5 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 import {
   FlatList,
   Image,
@@ -17,13 +18,14 @@ import {chipsStyles, contentStyles, headerStyles, mainStyles} from './styles';
 
 export function HomeScreen() {
   const navigation = useNavigation<HomeNavigationProp>();
+  const {t} = useTranslation(['home']);
 
   return (
     <View style={mainStyles.container}>
       <View style={mainStyles.body}>
         <View style={headerStyles.header}>
           <View style={headerStyles.headerWrapper}>
-            <Text style={headerStyles.title}>Find a space</Text>
+            <Text style={headerStyles.title}>{t('title')}</Text>
           </View>
           <TouchableOpacity
             onPress={() => console.log('click')}
@@ -37,8 +39,8 @@ export function HomeScreen() {
         </View>
 
         <View style={chipsStyles.container}>
-          <Text style={chipsStyles.chip}>Rooms</Text>
-          <Text style={chipsStyles.chip}>Tables</Text>
+          <Text style={chipsStyles.chip}>{t('rooms')}</Text>
+          <Text style={chipsStyles.chip}>{t('tables')}</Text>
         </View>
 
         <SafeAreaView style={contentStyles.container}>

@@ -1,4 +1,5 @@
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 import {Image, ScrollView, Text, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -9,13 +10,14 @@ import {headerStyles, mainStyles, optionsStyles, profileStyles} from './styles';
 
 export function ProfileScreen() {
   const navigation = useNavigation<ProfileNavigationProp>();
+  const {t} = useTranslation(['profile']);
 
   return (
     <View style={mainStyles.container}>
       <View style={mainStyles.body}>
         <View style={headerStyles.header}>
           <View style={headerStyles.headerWrapper}>
-            <Text style={headerStyles.title}>Account</Text>
+            <Text style={headerStyles.title}>{t('account')}</Text>
           </View>
         </View>
 
@@ -27,11 +29,11 @@ export function ProfileScreen() {
             />
             <View style={profileStyles.info}>
               <Text style={profileStyles.name}>Sophia Carter</Text>
-              <Text style={profileStyles.createdAt}>Joined in 2021</Text>
+              <Text style={profileStyles.createdAt}>{t('joinedIn')} 2021</Text>
             </View>
           </View>
 
-          <Text style={optionsStyles.title}>Account</Text>
+          <Text style={optionsStyles.title}>{t('account')}</Text>
           <View style={optionsStyles.wrapper}>
             <View style={optionsStyles.cardIcon}>
               <MaterialCommunityIcons
@@ -40,7 +42,7 @@ export function ProfileScreen() {
                 color="#0D141C"
               />
             </View>
-            <Text style={optionsStyles.name}>Personal information</Text>
+            <Text style={optionsStyles.name}>{t('personalInformation')}</Text>
           </View>
           <View style={optionsStyles.wrapper}>
             <View style={optionsStyles.cardIcon}>
@@ -50,7 +52,7 @@ export function ProfileScreen() {
                 color="#0D141C"
               />
             </View>
-            <Text style={optionsStyles.name}>Payment methods</Text>
+            <Text style={optionsStyles.name}>{t('paymentMethods')}</Text>
           </View>
           <View style={optionsStyles.wrapper}>
             <View style={optionsStyles.cardIcon}>
@@ -60,7 +62,7 @@ export function ProfileScreen() {
                 color="#0D141C"
               />
             </View>
-            <Text style={optionsStyles.name}>Notifications</Text>
+            <Text style={optionsStyles.name}>{t('notifications')}</Text>
           </View>
           <TouchableRipple
             onPress={() => navigation.navigate('Language')}
@@ -73,11 +75,11 @@ export function ProfileScreen() {
                   color="#0D141C"
                 />
               </View>
-              <Text style={optionsStyles.name}>Language</Text>
+              <Text style={optionsStyles.name}>{t('language')}</Text>
             </View>
           </TouchableRipple>
 
-          <Text style={optionsStyles.title}>Support</Text>
+          <Text style={optionsStyles.title}>{t('support')}</Text>
           <View style={optionsStyles.wrapper}>
             <View style={optionsStyles.cardIcon}>
               <MaterialCommunityIcons
@@ -86,7 +88,7 @@ export function ProfileScreen() {
                 color="#0D141C"
               />
             </View>
-            <Text style={optionsStyles.name}>Help center</Text>
+            <Text style={optionsStyles.name}>{t('helpCenter')}</Text>
           </View>
           <View style={optionsStyles.wrapper}>
             <View style={optionsStyles.cardIcon}>
@@ -96,7 +98,7 @@ export function ProfileScreen() {
                 color="#0D141C"
               />
             </View>
-            <Text style={optionsStyles.name}>Terms of service</Text>
+            <Text style={optionsStyles.name}>{t('termsOfService')}</Text>
           </View>
           <View style={optionsStyles.wrapper}>
             <View style={optionsStyles.cardIcon}>
@@ -106,7 +108,7 @@ export function ProfileScreen() {
                 color="#0D141C"
               />
             </View>
-            <Text style={optionsStyles.name}>Privacy policy</Text>
+            <Text style={optionsStyles.name}>{t('privacyPolicy')}</Text>
           </View>
         </ScrollView>
       </View>
