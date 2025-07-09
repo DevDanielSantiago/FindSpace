@@ -80,8 +80,10 @@ export const contentStyles = StyleSheet.create({
     color: '#4A739C',
   },
   cartImg: {
+    borderRadius: 8,
+  },
+  img: {
     width: 130,
     height: 70,
-    borderRadius: 8,
   },
 });

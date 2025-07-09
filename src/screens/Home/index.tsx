@@ -4,6 +4,7 @@ import {useTranslation} from 'react-i18next';
 import {
   FlatList,
   Image,
+  RefreshControl,
   SafeAreaView,
   Text,
   TouchableOpacity,
@@ -11,15 +12,33 @@ import {
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {Spaces} from '../../mocks/spaces.mock';
-
+// import {Spaces} from '../../mocks/spaces.mock';
+import {useQuery} from '@tanstack/react-query';
 import {TouchableRipple} from 'react-native-paper';
 import {HomeNavigationProp} from '../../navigation/HomeStackNavigator';
+import {getSpaces} from '../../services/spaces';
 import {chipsStyles, contentStyles, headerStyles, mainStyles} from './styles';
 
 export function HomeScreen() {
+  const [refreshing, setRefreshing] = React.useState(false);
   const navigation = useNavigation<HomeNavigationProp>();
   const {t} = useTranslation(['home']);
+
+  const {data, refetch} = useQuery({
+    queryKey: ['Spaces-List'],
+    queryFn: getSpaces,
+  });
+
+  async function onRefresh() {
+    try {
+      setRefreshing(true);
+      await refetch();
+    } catch (error) {
+      // Empty
+    } finally {
+      setRefreshing(false);
+    }
+  }
 
   return (
     <View style={mainStyles.container}>
@@ -46,25 +65,40 @@ export function HomeScreen() {
 
         <SafeAreaView style={contentStyles.container}>
           <FlatList
-            data={Spaces}
-            renderItem={({item: data, index}) => (
+            data={!data ? [] : data}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+                colors={['#007AFF']}
+              />
+            }
+            renderItem={({item}) => (
               <TouchableRipple
                 onPress={() =>
-                  navigation.navigate('Details', {itemId: data.id})
+                  navigation.navigate('Details', {itemId: item.id})
                 }
-                rippleColor="rgba(0, 0, 0, 0.32)">
+                rippleColor="rgba(0, 0, 0, 0.32)"
+                key={item.id}>
                 <View style={contentStyles.card}>
-                  <View key={index} style={contentStyles.cardWrapper}>
+                  <View style={contentStyles.cardWrapper}>
                     <Text style={contentStyles.cardAvailability}>
-                      {data.availability}
+                      {item.availability === true
+                        ? t('available')
+                        : t('unavailable')}
                     </Text>
-                    <Text style={contentStyles.cardName}>{data.name}</Text>
+                    <Text style={contentStyles.cardName}>{item.name}</Text>
                     <Text style={contentStyles.cardLocation}>
-                      {data.location}
+                      {item.location}
                     </Text>
                   </View>
                   <View style={contentStyles.cartImg}>
-                    {data?.image && <Image source={data.image} />}
+                    {item?.image && (
+                      <Image
+                        style={contentStyles.img}
+                        source={{uri: item.image}}
+                      />
+                    )}
                   </View>
                 </View>
               </TouchableRipple>

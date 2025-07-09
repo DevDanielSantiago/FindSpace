@@ -9,7 +9,7 @@ import {HomeScreen} from '../screens/Home';
 
 export type HomeStackParamList = {
   HomeMain: undefined;
-  Details: {itemId: number};
+  Details: {itemId: string};
 };
 
 export type HomeNavigationProp = NativeStackNavigationProp<HomeStackParamList>;

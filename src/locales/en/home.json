@@ -2,5 +2,6 @@
   "title": "Find a space",
   "rooms": "Rooms",
   "tables": "Tables",
-  "available": "Available"
+  "available": "Available",
+  "unavailable": "Unavailable"
 }
