@@ -13,6 +13,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import {Spaces} from '../../mocks/spaces.mock';
 
+import {TouchableRipple} from 'react-native-paper';
 import {HomeNavigationProp} from '../../navigation/HomeStackNavigator';
 import {chipsStyles, contentStyles, headerStyles, mainStyles} from './styles';
 
@@ -47,10 +48,11 @@ export function HomeScreen() {
           <FlatList
             data={Spaces}
             renderItem={({item: data, index}) => (
-              <TouchableOpacity
+              <TouchableRipple
                 onPress={() =>
                   navigation.navigate('Details', {itemId: data.id})
-                }>
+                }
+                rippleColor="rgba(0, 0, 0, 0.32)">
                 <View style={contentStyles.card}>
                   <View key={index} style={contentStyles.cardWrapper}>
                     <Text style={contentStyles.cardAvailability}>
@@ -65,7 +67,7 @@ export function HomeScreen() {
                     {data?.image && <Image source={data.image} />}
                   </View>
                 </View>
-              </TouchableOpacity>
+              </TouchableRipple>
             )}
           />
         </SafeAreaView>
