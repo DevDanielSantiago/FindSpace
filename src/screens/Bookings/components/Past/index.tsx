@@ -7,9 +7,12 @@ import {getBookings} from '../../../../services/bookings';
 import {BookingCard, BookingCardDataProp} from '../Card';
 import {BookingCardSkeleton} from '../CardSkeleton';
 
+import {useTranslation} from 'react-i18next';
+import {formatDateInterval} from '../../../../utils/formatInterval';
 import {mainStyles} from './styles';
 
 export function BookingsPastTab() {
+  const {i18n} = useTranslation();
   const [refreshing, setRefreshing] = useState(false);
   const {data, isLoading, refetch} = useQuery({
     queryKey: ['Bookings-List'],
@@ -23,11 +26,15 @@ export function BookingsPastTab() {
       .filter(booking => booking.isUsed === true)
       .map(booking => ({
         id: booking.id,
-        description: booking.booking,
+        description: formatDateInterval(
+          booking.bookingStart,
+          booking.bookingEnd,
+          i18n.language.toLowerCase().includes('pt') ? 'pt-BR' : 'en-US',
+        ),
         image: booking.image,
         name: booking.name,
       }));
-  }, [data]);
+  }, [data, i18n.language]);
 
   async function onRefresh() {
     try {

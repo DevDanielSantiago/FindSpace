@@ -4,5 +4,6 @@ export interface BookingResponse {
   location: string;
   image: string;
   isUsed: boolean;
-  booking: string;
+  bookingStart: string;
+  bookingEnd: string;
 }

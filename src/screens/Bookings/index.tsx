@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useMemo, useState} from 'react';
 import {Text, useWindowDimensions, View} from 'react-native';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 
 import {BookingsPastTab} from './components/Past';
 import {BookingsUpcomingTab} from './components/Upcoming';
 
+import {useTranslation} from 'react-i18next';
 import {headerStyles, mainStyles, tabsStyles} from './styles';
 
 const renderScene = SceneMap({
@@ -12,14 +13,18 @@ const renderScene = SceneMap({
   past: BookingsPastTab,
 });
 
-const routes = [
-  {key: 'upcoming', title: 'Upcoming'},
-  {key: 'past', title: 'Past'},
-];
-
 export function BookingsScreen() {
   const layout = useWindowDimensions();
-  const [index, setIndex] = React.useState(0);
+  const [index, setIndex] = useState(0);
+  const {t, i18n} = useTranslation(['bookings']);
+
+  const routes = useMemo(() => {
+    return [
+      {key: 'upcoming', title: t('upcoming')},
+      {key: 'past', title: t('past')},
+    ];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [i18n.language]);
 
   return (
     <View style={mainStyles.container}>
