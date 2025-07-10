@@ -1,9 +1,9 @@
 import {useNavigation} from '@react-navigation/native';
+import {useQuery} from '@tanstack/react-query';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {
   FlatList,
-  Image,
   RefreshControl,
   SafeAreaView,
   Text,
@@ -12,19 +12,20 @@ import {
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-// import {Spaces} from '../../mocks/spaces.mock';
-import {useQuery} from '@tanstack/react-query';
-import {TouchableRipple} from 'react-native-paper';
 import {HomeNavigationProp} from '../../navigation/HomeStackNavigator';
 import {getSpaces} from '../../services/spaces';
-import {chipsStyles, contentStyles, headerStyles, mainStyles} from './styles';
+
+import {SpacesResponse} from '../../@types/spaces';
+import {HomeCard} from './components/Card';
+import {HomeCardSkeleton} from './components/CardSkeleton';
+import {chipsStyles, headerStyles, mainStyles} from './styles';
 
 export function HomeScreen() {
   const [refreshing, setRefreshing] = React.useState(false);
   const navigation = useNavigation<HomeNavigationProp>();
   const {t} = useTranslation(['home']);
 
-  const {data, refetch} = useQuery({
+  const {data, isLoading, refetch} = useQuery({
     queryKey: ['Spaces-List'],
     queryFn: getSpaces,
   });
@@ -38,6 +39,10 @@ export function HomeScreen() {
     } finally {
       setRefreshing(false);
     }
+  }
+
+  function handleNavigate(itemId: string) {
+    navigation.navigate('Details', {itemId});
   }
 
   return (
@@ -63,46 +68,23 @@ export function HomeScreen() {
           <Text style={chipsStyles.chip}>{t('tables')}</Text>
         </View>
 
-        <SafeAreaView style={contentStyles.container}>
+        <SafeAreaView style={mainStyles.container}>
           <FlatList
-            data={!data ? [] : data}
-            refreshControl={
-              <RefreshControl
-                refreshing={refreshing}
-                onRefresh={onRefresh}
-                colors={['#007AFF']}
-              />
+            data={
+              (isLoading ? Array(2).fill(null) : !data ? [] : data) as
+                | SpacesResponse[]
+                | null[]
             }
-            renderItem={({item}) => (
-              <TouchableRipple
-                onPress={() =>
-                  navigation.navigate('Details', {itemId: item.id})
-                }
-                rippleColor="rgba(0, 0, 0, 0.32)"
-                key={item.id}>
-                <View style={contentStyles.card}>
-                  <View style={contentStyles.cardWrapper}>
-                    <Text style={contentStyles.cardAvailability}>
-                      {item.availability === true
-                        ? t('available')
-                        : t('unavailable')}
-                    </Text>
-                    <Text style={contentStyles.cardName}>{item.name}</Text>
-                    <Text style={contentStyles.cardLocation}>
-                      {item.location}
-                    </Text>
-                  </View>
-                  <View style={contentStyles.cartImg}>
-                    {item?.image && (
-                      <Image
-                        style={contentStyles.img}
-                        source={{uri: item.image}}
-                      />
-                    )}
-                  </View>
-                </View>
-              </TouchableRipple>
-            )}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+            renderItem={({item}) =>
+              item === null ? (
+                <HomeCardSkeleton />
+              ) : (
+                <HomeCard data={item} onPress={() => handleNavigate(item.id)} />
+              )
+            }
           />
         </SafeAreaView>
       </View>

@@ -53,37 +53,3 @@ export const chipsStyles = StyleSheet.create({
     fontSize: 14,
   },
 });
-
-export const contentStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  card: {
-    padding: 16,
-    flexDirection: 'row',
-  },
-  cardWrapper: {
-    gap: 4,
-    flex: 1,
-  },
-  cardAvailability: {
-    fontSize: 14,
-    color: '#4A739C',
-  },
-  cardName: {
-    fontSize: 16,
-    color: '#0D141C',
-    fontWeight: 'bold',
-  },
-  cardLocation: {
-    fontSize: 14,
-    color: '#4A739C',
-  },
-  cartImg: {
-    borderRadius: 8,
-  },
-  img: {
-    width: 130,
-    height: 70,
-  },
-});
