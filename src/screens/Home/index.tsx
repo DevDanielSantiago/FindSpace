@@ -18,6 +18,7 @@ import {getSpaces} from '../../services/spaces';
 import {SpacesResponse} from '../../@types/spaces';
 import {HomeCard} from './components/Card';
 import {HomeCardSkeleton} from './components/CardSkeleton';
+import {EmptyList} from './components/EmptyList';
 import {chipsStyles, headerStyles, mainStyles} from './styles';
 
 export function HomeScreen() {
@@ -70,6 +71,7 @@ export function HomeScreen() {
 
         <SafeAreaView style={mainStyles.container}>
           <FlatList
+            ListEmptyComponent={<EmptyList />}
             data={
               (isLoading ? Array(2).fill(null) : !data ? [] : data) as
                 | SpacesResponse[]

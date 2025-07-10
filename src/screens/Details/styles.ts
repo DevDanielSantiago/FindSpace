@@ -52,11 +52,12 @@ export const mainStyles = StyleSheet.create({
   calendar: {
     marginVertical: 16,
   },
-  button: {
+  contentButton: {
     height: 48,
-    paddingVertical: 6,
+    backgroundColor: '#0D80F2',
+  },
+  button: {
     borderRadius: 8,
     marginVertical: 12,
-    backgroundColor: '#0D80F2',
   },
 });

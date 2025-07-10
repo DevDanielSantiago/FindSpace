@@ -3,5 +3,12 @@
   "rooms": "Rooms",
   "tables": "Tables",
   "available": "Available",
-  "unavailable": "Unavailable"
+  "unavailable": "Unavailable",
+  "feedbacks": {
+    "noResult": {
+      "title": "No spaces available",
+      "description": "There are currently no spaces available for booking. Please contact support or check back later.",
+      "contact": "Contact Support"
+    }
+  }
 }

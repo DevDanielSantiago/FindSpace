@@ -98,6 +98,7 @@ export function DetailsScreen() {
           <Button
             textColor="#F7FAFC"
             mode="contained"
+            contentStyle={mainStyles.contentButton}
             style={mainStyles.button}
             onPress={() => console.log('Book Now')}>
             Book Now

@@ -3,5 +3,12 @@
   "rooms": "Salas",
   "tables": "Mesas",
   "available": "Disponível",
-  "unavailable": "Indisponível"
+  "unavailable": "Indisponível",
+  "feedbacks": {
+    "noResult": {
+      "title": "Não há espaços disponíveis",
+      "description": "Atualmente, não existem espaços disponíveis para reserva. Contacte o apoio ao cliente ou volte a consultar mais tarde.",
+      "contact": "Contactar o suporte"
+    }
+  }
 }
