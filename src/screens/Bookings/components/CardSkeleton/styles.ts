@@ -1,15 +1,5 @@
 import {StyleSheet} from 'react-native';
 
-export const mainStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F4F4F4',
-  },
-  body: {
-    flex: 1,
-  },
-});
-
 export const optionsStyles = StyleSheet.create({
   body: {
     paddingTop: 12,
@@ -22,11 +12,12 @@ export const optionsStyles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
   },
-  cardImg: {
+  cardContainer: {
+    borderRadius: 8,
+  },
+  cardImage: {
     width: 56,
     height: 56,
-    borderRadius: 8,
-    backgroundColor: 'green',
   },
   cardDetails: {
     flexDirection: 'row',

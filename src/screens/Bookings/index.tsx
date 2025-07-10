@@ -2,14 +2,14 @@ import React from 'react';
 import {Text, useWindowDimensions, View} from 'react-native';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 
-import {BookingsPastScreen} from './Past';
-import {BookingsUpcomingScreen} from './Upcoming';
+import {BookingsPastTab} from './components/Past';
+import {BookingsUpcomingTab} from './components/Upcoming';
 
 import {headerStyles, mainStyles, tabsStyles} from './styles';
 
 const renderScene = SceneMap({
-  upcoming: BookingsUpcomingScreen,
-  past: BookingsPastScreen,
+  upcoming: BookingsUpcomingTab,
+  past: BookingsPastTab,
 });
 
 const routes = [
